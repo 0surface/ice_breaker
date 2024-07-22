@@ -1,6 +1,5 @@
-from dotenv import load_dotenv
 import os
-from langchain.prompts.prompt import PromptTemplate
+from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 
 information = """
@@ -41,7 +40,6 @@ Musk has expressed views that have made him a polarizing figure.[5] He has been 
 
 
 if __name__ == "__main__":
-    load_dotenv()
     print("Hello LangChain!")
     print(os.environ["OPENAI_API_KEY"])
 
