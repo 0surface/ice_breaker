@@ -1,6 +1,9 @@
 import os
+
+from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
+from langchain_community.chat_models import ChatOllama
 
 information = """
     Elon Reeve Musk FRS (/ˈiːlɒn/; born June 28, 1971) is a businessman and investor known for his key roles in space 
@@ -41,7 +44,6 @@ Musk has expressed views that have made him a polarizing figure.[5] He has been 
 
 if __name__ == "__main__":
     print("Hello LangChain!")
-    print(os.environ["OPENAI_API_KEY"])
 
     summary_template = """
         given the information {information} about a person from I want you to create:
@@ -53,9 +55,11 @@ if __name__ == "__main__":
         input_variables=["information"], template=summary_template
     )
 
-    llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
+    # llm = ChatOpenAI(temperature=0, model_name="gpt-3.5-turbo")
+    # llm = ChatOllama(model="llama3")
+    llm = ChatOllama(model="mistral")
 
-    chain = summary_prompt_template | llm
+    chain = summary_prompt_template | llm | StrOutputParser()
 
     res = chain.invoke(input={"information": information})
 
