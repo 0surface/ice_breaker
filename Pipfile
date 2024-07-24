@@ -10,6 +10,7 @@ langchain-community = "*"
 langchainhub = "*"
 python-dotenv = "*"
 langchain-core = "*"
+tweepy = "*"
 
 [dev-packages]
 
