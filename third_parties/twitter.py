@@ -6,6 +6,9 @@ import requests
 load_dotenv()
 
 
+### Twitter api free version doesn't allow the implementation below- do not use.
+
+
 twitter_client = tweepy.Client(
     bearer_token=os.environ["TWITTER_BEARER_TOKEN"],
     consumer_key=os.environ["TWITTER_API_KEY"],
@@ -13,8 +16,6 @@ twitter_client = tweepy.Client(
     access_token=os.environ["TWITTER_ACCESS_TOKEN"],
     access_token_secret=os.environ["TWITTER_ACCESS_TOKEN_SECRET"],
 )
-
-
 
 
 def scrape_user_tweets(username, num_tweets=5, mock: bool = False):
@@ -34,7 +35,7 @@ def scrape_user_tweets(username, num_tweets=5, mock: bool = False):
     else:
         user_id = twitter_client.get_user(username=username).data.id
         _tweets = twitter_client.get_users_tweets(
-            id=user_id, max_results=num_tweets, exclude=['retweets', 'replies']
+            id=user_id, max_results=num_tweets, exclude=['retweets', 'replies'], user_auth=False,
         )
         tweets = _tweets.data
 
